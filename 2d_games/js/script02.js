@@ -10,8 +10,6 @@ function playerMove() {
     player.style.top = y + "px";
 }
 
-// playerMove();
-
 //filed
 const filedHeight = filed.offsetHeight;
 const filedWidth = filed.offsetWidth;
@@ -79,13 +77,6 @@ document.addEventListener("keydown", (event) => {
                     playerCurrentTop < y1 ||
                     playerCurrentTop > y2 ||
                     playerCurrentLeft + distance > x2)
-                // (playerCurrentTop < y1 ||
-                //     playerCurrentTop > y2 ||
-                //     playerCurrentLeft + distance < x1
-                // ||
-                // playerCurrentTop < y1 ||
-                // playerCurrentTop > y2 ||
-                // playerCurrentLeft - distance > x2)
             ) {
                 x += distance;
                 break;
@@ -111,6 +102,3 @@ document.addEventListener("keydown", (event) => {
     }
     playerMove();
 });
-
-// ||
-//                     playerCurrentTop - distance >= x2
