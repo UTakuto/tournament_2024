@@ -1,6 +1,7 @@
 const player = document.querySelector(".player");
 const staff = document.querySelector(".staff");
 const filed = document.querySelector(".filed");
+const modalWrap = document.querySelector(".modalWrap");
 
 //staff width height
 const staffW = staff.offsetWidth;
@@ -26,11 +27,13 @@ let x = 0;
 let y = 0;
 
 function filedModal() {
-    filed.insertAdjacentHTML(
-        "beforeend",
-        `<div class="modalWrap"><div class="modalContent"><div class="modal"></div></div></div>`
-    );
+    modalWrap.style.display = "block";
 }
+
+const modalClose = document.querySelector(".modalClose");
+modalClose.addEventListener("click", () => {
+    modalWrap.style.display = "none";
+});
 
 document.addEventListener("keydown", (event) => {
     //player top left
@@ -106,22 +109,25 @@ document.addEventListener("keydown", (event) => {
     player.style.top = y + "px";
 });
 
-const APIEndpoint = "https://click.ecc.ac.jp/ecc/sakakura/2023_jakunen/";
-const URLSelector = "api/staff/";
-const APISelector = APIEndpoint + URLSelector;
+const modalText = document.querySelector(".modalText");
 
-fetch(APISelector)
-    .then((response) => response.json())
-    // .then((response) => {
-    //     console.log(response.json());
-    // })
+const APIEndpoint =
+    "https://click.ecc.ac.jp/ecc/sakakura/2023_jakunen/api/staff/";
+fetch(APIEndpoint)
+    .then((response) => {
+        return response.json();
+    })
     .then((promiseData) => {
-        console.log(promiseData);
+        const newPromiseData = promiseData
+            .filter((promise) => {
+                return promise.event_type == "会話";
+            })
+            .sort((a, b) => {
+                return a.id < b.id ? -1 : 1;
+            })
+            .filter((pro) => {
+                return pro.staff_id == 1;
+            });
+        modalText.textContent = newPromiseData[0].text;
+        console.log(newPromiseData);
     });
-
-//foreach
-//map
-//filter
-//sort
-//配列の操作やってからAPIやる
-//[10,15,2,11,9,1]の配列用意してやってみる
