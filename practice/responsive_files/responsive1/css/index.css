@@ -1,0 +1,144 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    height: 60px;
+    padding: 0 15px;
+    background-color: beige;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu ul {
+    gap: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+li {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+@media screen and (max-width: 414px) {
+    .hamburger {
+        width: 60px;
+        height: 60px;
+        background-color: beige;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    .hamburger span,
+    .hamburger span:before,
+    .hamburger span:after {
+        content: "";
+        width: 25px;
+        height: 3px;
+        background-color: #000;
+        border-radius: 3px;
+        transition: all 0.5s;
+        position: absolute;
+    }
+
+    .hamburger span:before {
+        top: 8px;
+    }
+
+    .hamburger span:after {
+        bottom: 8px;
+    }
+
+    .hamburger.active span {
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    .hamburger.active span:before {
+        top: 0;
+        transform: rotate(45deg);
+    }
+
+    .hamburger.active span::after {
+        bottom: 0;
+        transform: rotate(-45deg);
+    }
+
+    .menu {
+        transform: translateX(200px);
+        transition: all 0.5s;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
+        height: 250px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .menu.active {
+        transform: translateX(0);
+        background-color: #f5f5f5;
+    }
+
+    .menu ul {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .menu ul li {
+        margin: 10px;
+    }
+}
+
+main {
+    width: 80%;
+    margin: 0 auto;
+}
+
+table {
+    margin: 50px auto;
+    border-collapse: collapse;
+
+    thead {
+        background-color: #a1a1a1;
+    }
+
+    th {
+        padding: 5px 8px;
+        border-collapse: collapse;
+        border: solid 1px #000;
+    }
+}
+
+@media screen and (max-width: 414px) {
+    table {
+        border-collapse: separate;
+
+        thead {
+            display: none;
+        }
+
+        tr > th:first-child {
+            background-color: #a1a1a1;
+        }
+
+        th {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}

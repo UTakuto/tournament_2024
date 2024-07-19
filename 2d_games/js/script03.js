@@ -26,14 +26,14 @@ const filedW = filed.offsetWidth;
 let x = 0;
 let y = 0;
 
-function filedModal() {
-    modalWrap.style.display = "block";
-}
-
 const modalClose = document.querySelector(".modalClose");
 modalClose.addEventListener("click", () => {
     modalWrap.style.display = "none";
 });
+
+function filedModal() {
+    modalWrap.style.display = "block";
+}
 
 document.addEventListener("keydown", (event) => {
     //player top left
@@ -104,7 +104,6 @@ document.addEventListener("keydown", (event) => {
                 break;
             }
     }
-
     player.style.left = x + "px";
     player.style.top = y + "px";
 });
@@ -118,6 +117,7 @@ fetch(APIEndpoint)
         return response.json();
     })
     .then((promiseData) => {
+        console.log(promiseData);
         const newPromiseData = promiseData
             .filter((promise) => {
                 return promise.event_type == "会話";
@@ -128,6 +128,15 @@ fetch(APIEndpoint)
             .filter((pro) => {
                 return pro.staff_id == 1;
             });
-        modalText.textContent = newPromiseData[0].text;
+
+        let count = 0;
+
+        document.addEventListener("keydown", (event) => {
+            modalText.textContent = newPromiseData[count].text;
+            switch (event.code) {
+                case "Space":
+                    count = count + 1;
+            }
+        });
         console.log(newPromiseData);
     });
